@@ -11,7 +11,7 @@ const getCountriesHandler = async (req, res) =>{
 const getCountryHandler = async (req, res) =>{
     const{idPais} = req.params;
 
-    const results = await getCountryById(idPais);
+    const results = await getCountryById(idPais.toUpperCase());
 
     res.status(200).send(results)
 
