@@ -1,8 +1,22 @@
-const {Country, TuristActivity} = require('../db');
-const axios = require('axios');
+const { TuristActivity } = require("../db");
+const axios = require("axios");
 
-const createActivity = async ({name, difficulty, duration, season}) =>{
-    return await TuristActivity.create({name, difficulty, duration, season })
-}
+const createActivity = async ({
+  name,
+  difficulty,
+  duration,
+  season,
+  countryArray,
+}) => {
+  const newActivity = await TuristActivity.create({
+    name,
+    difficulty,
+    duration,
+    season,
+  });
+  //acá se asocian las actividades y los paises
+  await newActivity.addCountries(countryArray);
+  return newActivity;
+};
 
-module.exports = {createActivity}
+module.exports = { createActivity };
