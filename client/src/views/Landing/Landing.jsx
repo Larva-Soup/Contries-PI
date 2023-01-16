@@ -6,3 +6,5 @@ const Landing = () =>{
         <button><Link to="/home">Home</Link></button>
     </div>)
 }
+
+export default Landing;
