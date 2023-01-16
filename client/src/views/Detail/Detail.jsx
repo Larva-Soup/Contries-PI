@@ -32,7 +32,6 @@ const Detail = () => {
   }
     ,[id])
   
-  //tengo que revisar las unidades de medida del área
     return (
     <div>
       <img src={country.flags} alt={`${country.name}'s flag`} />
