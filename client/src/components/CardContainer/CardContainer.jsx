@@ -10,6 +10,7 @@ const CardContainer = () => {
                 name={country.name}
                 flags={country.flags}
                 continents={country.continents}
+                id={country.id}
             />
         })}
     </div>)
