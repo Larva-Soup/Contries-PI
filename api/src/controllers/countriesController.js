@@ -8,7 +8,7 @@ const colador = (arr) => {
       name: country.name.common,
       //también podria ir por traducciones al español:
       //name: country.translations.spa.common
-      flags: country.flags[1], //esto trae el png
+      flags: country.flags[0], //esto trae el svg
       continents: country.continents[0],
       capital: Array.isArray(country.capital)
         ? country.capital[0]
