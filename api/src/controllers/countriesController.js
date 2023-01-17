@@ -44,21 +44,6 @@ const saveAllCountries = async () => {
   
 };
 
-// const saveCountryById = async() => {
-//   const idDbQuery = await Country.findAll();
-//   if(idDbQuery.length === 0) await saveAllCountries();
-
-//   return await Country.findAll({
-//     where: {
-//       id: idPais
-//     },
-//     include: {
-//       model: TuristActivity
-//     }
-//   })
-
-// }
-
 const getAllCountries = async () => {
     const dbQuery = await Country.findAll()
 
@@ -71,12 +56,21 @@ const getAllCountries = async () => {
   
 };
 
+const addActivitytoCountry = async(id) =>{
+  return await Country.findAll({where:{id:id},
+  include:{
+    model: TuristActivity
+  }})
+}
+
 const getCountryById = async (idPais) => {
   const countryByIdRaw = (
     await axios.get(`https://restcountries.com/v3/alpha/${idPais}`)
   ).data;
   const countryById = colador(countryByIdRaw);
-  return countryById[0];
+  const countryAndActivity = await addActivitytoCountry(countryById[0].id)
+  return countryAndActivity[0] || countryById[0];
+  
 };
 
 const searchByName = async (name) => {

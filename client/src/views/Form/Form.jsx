@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Form = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countries);
+  const countries = useSelector((state) => state.countriesDefault);
 
   const [form, setForm] = useState({
     name: "",

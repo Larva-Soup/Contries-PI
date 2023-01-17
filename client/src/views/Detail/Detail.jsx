@@ -1,47 +1,18 @@
 import { useParams } from "react-router-dom";
-// import axios from "axios";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "../../redux/actions";
 
-// const getData = async(id) =>{
-//   const countryDetail = (await axios.get(`http://localhost:3001/countries/${id}`)).data;
-//   return countryDetail;
-// }
-
 const Detail = () => {
+  const country = useSelector((state) => state.countries);
+  const dispatch = useDispatch();
 
-  const country = useSelector(state => state.countries)
-  const dispatch = useDispatch()
+  const { id } = useParams();
 
-  const {id} = useParams();
-
-  // const [country, setCountry] = useState({
-  //   flags: "",
-  //   name: "",
-  //   continents: "",
-  //   id: "",
-  //   capital: "",
-  //   subregion: "",
-  //   area: 0,
-  //   population: 0,
-  //   // TuristActivity: {}
-  // })
-
-  // useEffect(()=>{
-  //   async function fetchData(){
-  //     const data = await getData(id)
-  //     setCountry({ ...data})
-  //   }
-  //   fetchData();    
-  // }
-  //   ,[id])
-
-  useEffect(()=>{
-    dispatch(getCountry(id))
-  },[dispatch, id]);
-  
-    return (
+  useEffect(() => {
+    dispatch(getCountry(id));
+  }, [dispatch, id]);
+  return (
     <div>
       <img src={country.flags} alt={`${country.name}'s flag`} />
       <h3>{country.name}</h3>
@@ -51,7 +22,18 @@ const Detail = () => {
       <p>Subregion: {country.subregion}</p>
       <p>Area: {country.area} km²</p>
       <p>Population: {country.population}</p>
-
+      {country.turistActivities && country.turistActivities.length !== 0 && <><hr></hr> <h3>Turist Activities</h3></>}
+      {country.turistActivities && country.turistActivities.length !== 0 &&
+        country.turistActivities.map((activity) => {
+          return (
+            <div key={activity.id}>
+              <h4>Activity Name: {activity.name}</h4>
+              <p>Difficulty: {activity.difficulty}</p>
+              <p>Duration: {activity.duration} hh/mm/ss</p>
+              <p>Season: {activity.season}</p>
+            </div>
+          );
+        })}
     </div>
   );
 };
