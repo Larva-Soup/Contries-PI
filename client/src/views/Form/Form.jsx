@@ -1,12 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getCountries} from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const Form = () => {
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.countries);
+
   const [form, setForm] = useState({
     name: "",
     difficulty: "",
-    duration: "", 
+    duration: "",
     season: "",
+    countryArray: [],
   });
 
   const [time, setTime] = useState({
@@ -20,6 +26,12 @@ const Form = () => {
     duration: "", 
     season: "",
   }); */
+
+  // const [countryName, setCountryName] = useState({id:"", name:""}) //pospuesto
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [dispatch]);
 
   const changeTime = (e) => {
     const prop = e.target.name;
@@ -38,9 +50,7 @@ const Form = () => {
 
     return setForm({
       ...form,
-      duration: `${hours || time.hours} hours and ${
-        minutes || time.minutes
-      } minutes`,
+      duration: `${hours || time.hours}:${minutes || time.minutes}`,
     });
   };
 
@@ -51,13 +61,28 @@ const Form = () => {
     setForm({ ...form, [prop]: value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/activities", form)
-      .then((res) => alert(res))
-      .catch((err) => alert(err));
+    axios.post("http://localhost:3001/activities", form)
   };
+
+  const handleCountrySelect = (e) =>{
+    setForm({...form, countryArray: [...form.countryArray, e.target.value] })
+  } 
+  
+  const handleCountryUnselect = (e) =>{
+    
+    const arr = form.countryArray.filter(country=> country !== e.target.value);
+    
+    setForm({...form, countryArray: arr})
+    
+  } 
+  
+
+  // const filteredCountries = countries.filter((country)=>{
+  //   country.id ===
+  //  }
+  //   )
 
   return (
     <form onSubmit={submitHandler}>
@@ -108,6 +133,22 @@ const Form = () => {
           <option value="Invierno">Winter</option>
         </select>
       </div>
+      <div><label>Select countries</label>
+      <select onChange={handleCountrySelect}>
+        {countries.map((country) => {
+          return <option value={country.id} key={country.id}>{country.name}</option>;
+        })}
+      </select></div>
+      <div>
+        <label>Unselect countries</label>
+        <select onChange={handleCountryUnselect}>
+          {form.countryArray.map(country => (<option value={country} key={country}>{country}</option>))}
+        </select>
+      </div>
+
+      
+        <input type="submit" />
+      
     </form>
   );
 };

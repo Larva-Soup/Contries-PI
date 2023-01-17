@@ -5,7 +5,8 @@ const createActivityHandler = async(req, res) =>{
     // const activity = req.body
     try {
         const results = await createActivity(req.body);
-        res.status(201).send("Actividad creada con exito")
+
+        res.status(201).send("actividad creada con éxico")
     } catch (error) {
         res.status(400).send({error: error.message})
     }
