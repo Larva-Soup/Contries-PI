@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Card = ({ name, flags, continents, id }) => {
   return (
     <div className={style.card}>
-      <img src={flags} alt={`${name}'s flag`} />
+      <img src={flags} alt={`${name}'s flag`} height="300px" width="500px" />
       <Link to={`/${id}`}>
         <h3>{name}</h3>
       </Link>
