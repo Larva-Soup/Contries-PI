@@ -14,7 +14,7 @@ const Detail = () => {
   }, [dispatch, id]);
   return (
     <div>
-      <img src={country.flags} alt={`${country.name}'s flag`} />
+      <img src={country.flags} alt={`${country.name}'s flag` } height="300px" width="500px" />
       <h3>{country.name}</h3>
       <p>Continent: {country.continents}</p>
       <p>id(cca3): {country.id}</p>
