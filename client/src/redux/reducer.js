@@ -1,6 +1,7 @@
-import { GET_COUNTRIES, POST_ACTIVITY} from "./actions";
+import { GET_COUNTRIES, GET_COUNTRY, POST_ACTIVITY} from "./actions";
 
 const initialState = {
+    countriesDefault:[],
     countries:[],
     activities:[],
 }
@@ -8,9 +9,11 @@ const initialState = {
 const rootReducer = (state=initialState, action) => {
     switch (action.type) {
         case GET_COUNTRIES:
-            return {...state, countries: action.payload};
+            return {...state, countriesDefault:action.payload, countries: action.payload};
+        case GET_COUNTRY:
+            return {...state, countries: action.payload}
         case POST_ACTIVITY:
-            return {...state}
+            return {...state};
         default:
             return {...state};
     }

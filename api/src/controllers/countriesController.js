@@ -1,4 +1,4 @@
-const { Country } = require("../db");
+const { Country, TuristActivity } = require("../db");
 const axios = require("axios");
 
 const colador = (arr) => {
@@ -44,6 +44,21 @@ const saveAllCountries = async () => {
   
 };
 
+// const saveCountryById = async() => {
+//   const idDbQuery = await Country.findAll();
+//   if(idDbQuery.length === 0) await saveAllCountries();
+
+//   return await Country.findAll({
+//     where: {
+//       id: idPais
+//     },
+//     include: {
+//       model: TuristActivity
+//     }
+//   })
+
+// }
+
 const getAllCountries = async () => {
     const dbQuery = await Country.findAll()
 
@@ -51,6 +66,7 @@ const getAllCountries = async () => {
     
     return await Country.findAll({
         attributes:['id', 'name', 'flags', 'continents']
+        
     })
   
 };

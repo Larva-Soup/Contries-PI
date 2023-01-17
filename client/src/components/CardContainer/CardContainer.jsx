@@ -2,7 +2,7 @@ import {useSelector} from "react-redux"
 import Card from "../Card/Card"
 
 const CardContainer = () => {
-    const countries = useSelector(state => state.countries)
+    const countries = useSelector(state => state.countriesDefault)
     return(<div>
         {countries.map(country => {
             return <Card

@@ -8,11 +8,6 @@ const createActivity = async ({
   season,
   countryArray,
 }) => {
-  // const countries= await countryArray.map(async(name) => {return await Country.findAll({
-  //   where: {
-  //     name: name
-  //   }
-  // })})
 
   const newActivity = await TuristActivity.create({
     name,
