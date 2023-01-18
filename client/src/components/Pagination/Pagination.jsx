@@ -1,3 +1,5 @@
+import style from "./Pagination.module.css"
+
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumber = [];
 
@@ -7,11 +9,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   return (
     <div>
-      <nav>
+      <nav className={style.pagination}>
         <ul>
           {pageNumber.map((number) => (
             <li key={number}>
-              <button onClick={() => paginate(number)}>{number}</button>
+              <button className={style.button} onClick={() => paginate(number)}>{number}</button>
             </li>
           ))}
         </ul>

@@ -1,0 +1,43 @@
+.pagination {
+    display:inline-block;
+}
+
+.button {
+    border: none;
+    color: #FDED2A;
+    background-color: #700CBC;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
+}
+
+.button:hover{
+    background-color: #9168b0;
+    color:#191918;
+}
+
+.button:active{
+    background-color: #FDED2A;
+    color:#191918;
+    transform: translateY(4px);
+}
+
+.button:focus{
+    background-color: #FDED2A;
+    color:#191918;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
