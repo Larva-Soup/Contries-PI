@@ -49,8 +49,7 @@ const Form = () => {
   const validateDifficulty = (form) => {
     if (form.difficulty < 1 || form.difficulty > 5) {
       setErrors({ ...errors, difficulty: "Please select a proper value" });
-      setForm({ ...form, difficulty: "que pasa" });
-      console.log(form);
+      setForm({ ...form, difficulty: "" });
     } else {
       setErrors({ ...errors, difficulty: "" });
     }
