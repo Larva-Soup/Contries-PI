@@ -6,7 +6,7 @@ import { difficultyOptions, seasonOptions } from "./formHelpers";
 
 const Form = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countriesDefault);
+  const countries = useSelector((state) => state.country);
 
   const [form, setForm] = useState({
     name: "",
