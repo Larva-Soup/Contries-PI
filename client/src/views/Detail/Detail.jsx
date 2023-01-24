@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "../../redux/actions";
 
 const Detail = () => {
-  const country = useSelector((state) => state.countries);
+  const country = useSelector((state) => state.country);
   const dispatch = useDispatch();
 
   const { id } = useParams();
