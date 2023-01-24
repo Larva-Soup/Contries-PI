@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import {continents} from "./cardContainerHelper.js"
+import {filterByContinent} from "../../redux/actions.js"
 
 const CardContainer = ({ loading }) => {
+  const dispatch = useDispatch()
+
   const [currentPage, setCurretPage] = useState(1);
   const [postsPerPage] = useState(10);
 
@@ -16,11 +19,15 @@ const CardContainer = ({ loading }) => {
 
   const paginate = (pageNumber) => setCurretPage(pageNumber);
 
+  const filterByContinentHandler = (e) =>{
+    dispatch(filterByContinent(e.target.value))
+  }
+
   return (
     <div>
       <div>
         <span>
-          <select>
+          <select onChange={(e) => filterByContinentHandler(e)} >
             {continents.map(continent => (
               <option value= {continent.value} key={continent.value}>{continent.value}</option>
             ))}

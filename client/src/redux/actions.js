@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
 export const GET_COUNTRY = "GET_COUNTRY";
+export const FILTER_BY_CONTINENTS = "FILTER_BY_CONTINENTS";
 
 // export const postActivity = (form) => {
 //   return async function () {
@@ -23,4 +24,10 @@ export const getCountry = (id) => {
         const country = (await axios.get(`http://localhost:3001/countries/${id}`)).data;
         dispatch({type: GET_COUNTRY, payload: country});
     }
+}
+
+export const filterByContinent = (payload) => {
+  return {
+    type: FILTER_BY_CONTINENTS, payload
+  }
 }

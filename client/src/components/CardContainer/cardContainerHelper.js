@@ -1,5 +1,5 @@
 const continents = [
-    {value: "--Select continent--"},
+  { value: "All" },
   { value: "North America" },
   { value: "Africa" },
   { value: "Asia" },
@@ -9,4 +9,4 @@ const continents = [
   { value: "Antarctica" },
 ];
 
-export {continents}
+export { continents };
