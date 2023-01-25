@@ -3,7 +3,7 @@ import { useState } from "react";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import {continents} from "./cardContainerHelper.js"
-import {filterByContinent} from "../../redux/actions.js"
+import {filterByContinent, orderByName} from "../../redux/actions.js"
 
 const CardContainer = ({ loading }) => {
   const dispatch = useDispatch()
@@ -20,7 +20,13 @@ const CardContainer = ({ loading }) => {
   const paginate = (pageNumber) => setCurretPage(pageNumber);
 
   const filterByContinentHandler = (e) =>{
+    document.getElementById("names").value = "default"
     dispatch(filterByContinent(e.target.value))
+
+  }
+
+  const orderAlphabetically = (e) => {
+    dispatch(orderByName(e.target.value))
   }
 
   return (
@@ -38,8 +44,8 @@ const CardContainer = ({ loading }) => {
           <option value="clear">Everything</option></select>
         </span>
         <span>
-          <select>
-            <option value= "">--Order alphabetically--</option>
+          <select onChange={(e) => orderAlphabetically(e)} id="names">
+            <option value="default">--Order Alphabetically--</option>
             <option value="asc">Ascendent</option>
           <option value="desc">Descendent</option></select>
         </span>

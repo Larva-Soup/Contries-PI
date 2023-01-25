@@ -2,6 +2,7 @@ import {
   FILTER_BY_CONTINENTS,
   GET_COUNTRIES,
   GET_COUNTRY,
+  ORDER_BY_NAME,
   POST_ACTIVITY,
 } from "./actions";
 
@@ -33,6 +34,33 @@ const rootReducer = (state = initialState, action) => {
               (country) => action.payload === country.continents
             );
       return { ...state, countries: countriesByContinent };
+    case ORDER_BY_NAME:
+      const allCountriesByName = state.countries;
+      if(action.payload === "") return;
+      else if(action.payload === "asc") {
+        allCountriesByName.sort(function(a,b){
+          if(a.name < b.name){
+            return -1
+          }
+          if(a.name > b.name){
+            return 1
+          }
+          return 0
+        }) 
+      }
+      else {
+        allCountriesByName.sort(function(a,b){
+          if(a.name < b.name){
+            return 1
+          }
+          if(a.name > b.name){
+            return -1
+          }
+          return 0
+        }) 
+      }
+      return {...state, countries: [...allCountriesByName]}
+      
     default:
       return { ...state };
   }

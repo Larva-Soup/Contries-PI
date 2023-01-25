@@ -3,6 +3,7 @@ export const GET_COUNTRIES = "GET_COUNTRIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
 export const GET_COUNTRY = "GET_COUNTRY";
 export const FILTER_BY_CONTINENTS = "FILTER_BY_CONTINENTS";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
 
 // export const postActivity = (form) => {
 //   return async function () {
@@ -29,5 +30,11 @@ export const getCountry = (id) => {
 export const filterByContinent = (payload) => {
   return {
     type: FILTER_BY_CONTINENTS, payload
+  }
+}
+
+export const orderByName = (payload) =>{
+  return {
+    type: ORDER_BY_NAME, payload
   }
 }
