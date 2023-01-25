@@ -3,6 +3,7 @@ import {
   GET_COUNTRIES,
   GET_COUNTRY,
   ORDER_BY_NAME,
+  ORDER_BY_POPULATION,
   POST_ACTIVITY,
 } from "./actions";
 
@@ -36,31 +37,55 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, countries: countriesByContinent };
     case ORDER_BY_NAME:
       const allCountriesByName = state.countries;
-      if(action.payload === "") return;
-      else if(action.payload === "asc") {
-        allCountriesByName.sort(function(a,b){
-          if(a.name < b.name){
-            return -1
+      if (action.payload === "") return;
+      else if (action.payload === "asc") {
+        allCountriesByName.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
           }
-          if(a.name > b.name){
-            return 1
+          if (a.name > b.name) {
+            return 1;
           }
-          return 0
-        }) 
+          return 0;
+        });
+      } else {
+        allCountriesByName.sort(function (a, b) {
+          if (a.name < b.name) {
+            return 1;
+          }
+          if (a.name > b.name) {
+            return -1;
+          }
+          return 0;
+        });
       }
-      else {
-        allCountriesByName.sort(function(a,b){
-          if(a.name < b.name){
-            return 1
+      return { ...state, countries: [...allCountriesByName] };
+
+    case ORDER_BY_POPULATION:
+      const countriesByPopulation = state.countries;
+      if (action.payload === "") return;
+      else if(action.payload === "asc"){
+        countriesByPopulation.sort(function (a, b) {
+          if (a.population < b.population) {
+            return -1;
           }
-          if(a.name > b.name){
-            return -1
+          if (a.population > b.population) {
+            return 1;
           }
-          return 0
-        }) 
+          return 0;
+        })
+      } else {
+        countriesByPopulation.sort(function (a, b) {
+          if (a.population < b.population) {
+            return 1;
+          }
+          if (a.population > b.population) {
+            return -1;
+          }
+          return 0;
+        });
       }
-      return {...state, countries: [...allCountriesByName]}
-      
+      return {...state, countries: [...countriesByPopulation]}
     default:
       return { ...state };
   }

@@ -4,6 +4,7 @@ export const POST_ACTIVITY = "POST_ACTIVITY";
 export const GET_COUNTRY = "GET_COUNTRY";
 export const FILTER_BY_CONTINENTS = "FILTER_BY_CONTINENTS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_POPULATION = "ORDER_BY_POPULATION"
 
 // export const postActivity = (form) => {
 //   return async function () {
@@ -36,5 +37,11 @@ export const filterByContinent = (payload) => {
 export const orderByName = (payload) =>{
   return {
     type: ORDER_BY_NAME, payload
+  }
+}
+
+export const orderByPopulation = (payload) => {
+  return {
+    type: ORDER_BY_POPULATION, payload
   }
 }

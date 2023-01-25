@@ -3,7 +3,7 @@ import { useState } from "react";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import {continents} from "./cardContainerHelper.js"
-import {filterByContinent, orderByName} from "../../redux/actions.js"
+import {filterByContinent, orderByName, orderByPopulation} from "../../redux/actions.js"
 
 const CardContainer = ({ loading }) => {
   const dispatch = useDispatch()
@@ -20,13 +20,18 @@ const CardContainer = ({ loading }) => {
   const paginate = (pageNumber) => setCurretPage(pageNumber);
 
   const filterByContinentHandler = (e) =>{
-    document.getElementById("names").value = "default"
+    document.getElementById("names").value = "";
+    document.getElementById("population").value = "";
     dispatch(filterByContinent(e.target.value))
 
   }
 
-  const orderAlphabetically = (e) => {
+  const alphabeticalOrderHandler = (e) => {
     dispatch(orderByName(e.target.value))
+  }
+
+  const sortByPopulationHandler = (e) => {
+    dispatch(orderByPopulation(e.target.value))
   }
 
   return (
@@ -44,13 +49,13 @@ const CardContainer = ({ loading }) => {
           <option value="clear">Everything</option></select>
         </span>
         <span>
-          <select onChange={(e) => orderAlphabetically(e)} id="names">
-            <option value="default">--Order Alphabetically--</option>
+          <select onChange={(e) => alphabeticalOrderHandler(e)} id="names">
+            <option value="">--Order Alphabetically--</option>
             <option value="asc">Ascendent</option>
           <option value="desc">Descendent</option></select>
         </span>
         <span>
-          <select><option value="">--Order by population--</option>
+          <select onChange={(e) => sortByPopulationHandler(e)} id="population"><option value="">--Order by population--</option>
           <option value="asc">Ascendent</option>
           <option value="desc">Descendent</option></select>
         </span>
@@ -63,6 +68,7 @@ const CardContainer = ({ loading }) => {
             name={country.name}
             flags={country.flags}
             continents={country.continents}
+            population={country.population}
             id={country.id}
           />
         );
