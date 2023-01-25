@@ -50,7 +50,7 @@ const getAllCountries = async () => {
     if(dbQuery.length === 0) await saveAllCountries() 
     
     return await Country.findAll({
-        attributes:['id', 'name', 'flags', 'continents']
+        attributes:['id', 'name', 'flags', 'continents', 'population']
         
     })
   
