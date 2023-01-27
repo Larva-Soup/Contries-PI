@@ -1,5 +1,5 @@
 const continents = [
-  { value: "All" },
+  { value: "All Continents" },
   { value: "North America" },
   { value: "Africa" },
   { value: "Asia" },

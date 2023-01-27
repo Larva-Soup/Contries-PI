@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CardContainer from "../../components/CardContainer/CardContainer";
-import {getCountries} from "../../redux/actions"
+import {getActivities, getCountries, getActivitiesList} from "../../redux/actions"
 
 
 const Home = () => {
@@ -14,6 +14,8 @@ const Home = () => {
     useEffect(()=>{
         setLoading(true)
         dispatch(getCountries());
+        dispatch(getActivities());
+        dispatch(getActivitiesList());
         setLoading(false)
     }, [dispatch])
 

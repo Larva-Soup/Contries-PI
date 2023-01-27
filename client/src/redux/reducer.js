@@ -1,5 +1,9 @@
 import {
+  ACTIVITY_BY_NAME,
+  CLEAR_FILTERS,
+  CREATE_ACTIVITIES_TABLE,
   FILTER_BY_CONTINENTS,
+  GET_ACTIVITIES,
   GET_COUNTRIES,
   GET_COUNTRY,
   ORDER_BY_NAME,
@@ -12,6 +16,7 @@ const initialState = {
   countries: [],
   country: [],
   activities: [],
+  activitiesHashTable: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_CONTINENTS:
       const allCountries = state.countriesDefault;
       const countriesByContinent =
-        action.payload === "All"
+        action.payload === "All Continents"
           ? allCountries
           : allCountries.filter(
               (country) => action.payload === country.continents
@@ -64,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_POPULATION:
       const countriesByPopulation = state.countries;
       if (action.payload === "") return;
-      else if(action.payload === "asc"){
+      else if (action.payload === "asc") {
         countriesByPopulation.sort(function (a, b) {
           if (a.population < b.population) {
             return -1;
@@ -73,7 +78,7 @@ const rootReducer = (state = initialState, action) => {
             return 1;
           }
           return 0;
-        })
+        });
       } else {
         countriesByPopulation.sort(function (a, b) {
           if (a.population < b.population) {
@@ -85,7 +90,31 @@ const rootReducer = (state = initialState, action) => {
           return 0;
         });
       }
-      return {...state, countries: [...countriesByPopulation]}
+      return { ...state, countries: [...countriesByPopulation] };
+    case GET_ACTIVITIES:
+      return {
+        ...state,
+        activities: action.payload,
+      };
+    case CREATE_ACTIVITIES_TABLE:
+      const hashTable = {};
+      for (const activity of state.activities) {
+        hashTable[activity.name] = true;
+      }
+      return {
+        ...state,
+        activitiesHashTable: { ...hashTable },
+      };
+    case ACTIVITY_BY_NAME:
+      let countriesWithActivity = [];
+      for (const activity of state.activities) {
+        if (activity.name === action.payload) {
+          countriesWithActivity = [...activity.countries];
+        }
+      }
+      return { ...state, countries: countriesWithActivity };
+    case CLEAR_FILTERS:
+      return{...state, countries: state.countriesDefault}
     default:
       return { ...state };
   }
