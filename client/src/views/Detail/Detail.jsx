@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "../../redux/actions";
+import NoMatch from "../../components/NoMatch/NoMatch";
 
 const Detail = () => {
   const country = useSelector((state) => state.country);
@@ -12,9 +13,18 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getCountry(id));
   }, [dispatch, id]);
+
+  if (!country.name) {
+    return (<div><NoMatch/></div>);
+  }
   return (
     <div>
-      <img src={country.flags} alt={`${country.name}'s flag` } height="300px" width="500px" />
+      <img
+        src={country.flags}
+        alt={`${country.name}'s flag`}
+        height="300px"
+        width="500px"
+      />
       <h3>{country.name}</h3>
       <p>Continent: {country.continents}</p>
       <p>id(cca3): {country.id}</p>
@@ -22,8 +32,13 @@ const Detail = () => {
       <p>Subregion: {country.subregion}</p>
       <p>Area: {country.area} km²</p>
       <p>Population: {country.population}</p>
-      {country.turistActivities && country.turistActivities.length !== 0 && <><hr></hr> <h3>Turist Activities</h3></>}
-      {country.turistActivities && country.turistActivities.length !== 0 &&
+      {country.turistActivities && country.turistActivities.length !== 0 && (
+        <>
+          <hr></hr> <h3>Turist Activities</h3>
+        </>
+      )}
+      {country.turistActivities &&
+        country.turistActivities.length !== 0 &&
         country.turistActivities.map((activity) => {
           return (
             <div key={activity.id}>

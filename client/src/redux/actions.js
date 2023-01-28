@@ -9,6 +9,7 @@ export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const ACTIVITY_BY_NAME = "ACTIVITY_BY_NAME";
 export const CREATE_ACTIVITIES_TABLE = "CREATE_ACTIVITIES_TABLE";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 
 // export const postActivity = (form) => {
 //   return async function () {
@@ -27,9 +28,14 @@ export const getCountries = () => {
 
 export const getCountry = (id) => {
   return async function (dispatch) {
-    const country = (await axios.get(`http://localhost:3001/countries/${id}`))
+    try {
+      const country = (await axios.get(`http://localhost:3001/countries/${id}`))
       .data;
-    dispatch({ type: GET_COUNTRY, payload: country });
+      dispatch({ type: GET_COUNTRY, payload: country });
+    } catch (error) {
+      
+    }
+    
   };
 };
 
@@ -77,4 +83,13 @@ export const clearFilters = () => {
   return {
     type: CLEAR_FILTERS
   }
+}
+
+export const searchByName = (query) =>{
+  return async function(dispatch){
+    const country = (await axios.get(`http://localhost:3001/countries?name=${query}`))
+      .data;
+    dispatch({type: SEARCH_BY_NAME, payload: [country]})
+  }
+
 }

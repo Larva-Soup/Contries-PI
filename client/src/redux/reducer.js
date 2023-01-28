@@ -9,6 +9,7 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
   POST_ACTIVITY,
+  SEARCH_BY_NAME,
 } from "./actions";
 
 const initialState = {
@@ -114,7 +115,9 @@ const rootReducer = (state = initialState, action) => {
       }
       return { ...state, countries: countriesWithActivity };
     case CLEAR_FILTERS:
-      return{...state, countries: state.countriesDefault}
+      return{...state, countries: state.countriesDefault};
+    case SEARCH_BY_NAME:
+      return{...state, countries: action.payload}
     default:
       return { ...state };
   }
