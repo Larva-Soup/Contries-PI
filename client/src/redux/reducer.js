@@ -100,11 +100,11 @@ const rootReducer = (state = initialState, action) => {
     case CREATE_ACTIVITIES_TABLE:
       const hashTable = {};
       for (const activity of state.activities) {
-        hashTable[activity.name] = true;
+        !hashTable[activity.name] && (hashTable[activity.name] = true);
       }
       return {
         ...state,
-        activitiesHashTable: { ...hashTable },
+        activitiesHashTable: { ...state.activitiesHashTable, ...hashTable },
       };
     case ACTIVITY_BY_NAME:
       let countriesWithActivity = [];

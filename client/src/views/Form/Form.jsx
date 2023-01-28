@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { getCountries } from "../../redux/actions";
+import { getCountries, getActivitiesList } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { difficultyOptions, seasonOptions } from "./formHelpers";
 
@@ -17,8 +17,8 @@ const Form = () => {
   });
 
   const [time, setTime] = useState({
-    hours: 0,
-    minutes: 1,
+    hours: 1,
+    minutes: 0,
   });
 
   const [errors, setErrors] = useState({
@@ -30,57 +30,80 @@ const Form = () => {
     countryArray: "",
   });
 
+  const [isValid, setIsValid] = useState(false);
+  const activitiesList = useSelector((state) => state.activitiesHashTable);
+
   const validateName = (form) => {
+    if (activitiesList[form.name]) {
+      setIsValid(false)
+      return setErrors({ ...errors, name: `${form.name} already exists` });
+    } else {
+      setErrors({ ...errors, name: "" });
+      setIsValid(true)
+    }
+
     if (/^([a-zA-Z0-9\sÁÉÍÓÚáéíóúÑñ#]+)$/.test(form.name)) {
       if (form.name.length < 4) {
+        setIsValid(false)
         setErrors({ ...errors, name: "Too short" });
       } else {
+        setIsValid(true)
         setErrors({ ...errors, name: "" });
       }
     } else {
+      setIsValid(false)
       setErrors({ ...errors, name: "Not permitted character(s)" });
     }
 
     if (form.name === "") {
+      setIsValid(false)
       setErrors({ ...errors, name: "Empty field" });
     }
+    setForm({...form, countryArray:[...form.countryArray]})
   };
 
   const validateDifficulty = (form) => {
     if (form.difficulty < 1 || form.difficulty > 5) {
       setErrors({ ...errors, difficulty: "Please select a proper value" });
       setForm({ ...form, difficulty: "" });
+      setIsValid(false)
     } else {
+      setIsValid(true)
       setErrors({ ...errors, difficulty: "" });
     }
   };
 
   const validateHours = (time) => {
     if (/^(2[0-3]|[01]?[0-9])$/gm.test(time.hours)) {
-      setErrors({...errors, hours:""});
-
+      setErrors({ ...errors, hours: "" });
+      setIsValid(true)
     } else {
       setErrors({ ...errors, hours: "from 0 to 23 hours only" });
+      setIsValid(false)
     }
-  }
+  };
 
   const validateMinutes = (time) => {
     // const regexcompleto = /^(2[0-3]|[01][0-9]):([0-5][0-9])$/gm
-    if(/^([0-5]?[0-9])$/gm.test(time.minutes)){
-      setErrors({...errors, minutes:""})
-    }else{
-      setErrors({...errors, minutes: "from 0 to 59 minutes only"})
+    if (/^([0-5]?[0-9])$/gm.test(time.minutes)) {
+      setErrors({ ...errors, minutes: "" });
+      setIsValid(true)
+    } else {
+      setErrors({ ...errors, minutes: "from 0 to 59 minutes only" });
+      setIsValid(false)
     }
   };
 
   const validateBoth = (time) => {
-    if(time.hours === "0" && time.minutes === "0"){
-      setErrors({...errors, minutes:"Please input a proper time"})
-      setTime({...time})
-    }/* if(time.hours > 0){
+    if (time.hours === "0" && time.minutes === "0") {
+      setErrors({ ...errors, minutes: "Please input a proper time" });
+      setIsValid(false);
+      setTime({ ...time });
+    }    
+    /* if(time.hours > 0){
       setErrors({...errors, minutes:""})
     } */
-  }
+  };
 
   const validateSeason = (form) => {
     if (
@@ -90,15 +113,19 @@ const Form = () => {
       form.season === "Invierno"
     ) {
       setErrors({ ...errors, season: "" });
+      setIsValid(true)
     } else {
+      setIsValid(false)
       setErrors({ ...errors, season: "Incorrect value" });
     }
   };
 
   const validateCountries = (form) => {
     if (form.countryArray.length > 0) {
+      setIsValid(true)
       setErrors({ ...errors, countryArray: "" });
     } else {
+      setIsValid(false)
       setErrors({
         ...errors,
         countryArray: "Please select at least one country",
@@ -110,6 +137,7 @@ const Form = () => {
 
   useEffect(() => {
     dispatch(getCountries());
+    dispatch(getActivitiesList());
   }, [dispatch]);
 
   const changeTime = (e) => {
@@ -127,9 +155,9 @@ const Form = () => {
       validateMinutes({ ...time, [prop]: value });
     }
 
-    validateBoth({...time, [prop]: value})
+    validateBoth({ ...time, [prop]: value });
 
-    setTime({...time, [prop]: value});
+    setTime({ ...time, [prop]: value });
 
     setForm({
       ...form,
@@ -153,22 +181,22 @@ const Form = () => {
     setForm({ ...form, [prop]: value });
   };
 
-  // const abortSubmit = () => {
-  //   if (!Object.values(errors).includes("")) {
-  //     console.log("no vas a ningún lado")
-  //     return;
-  //   }
-  // }
-
   //se puede cambiar este
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    if(!form.countryArray.length){
+      setIsValid(false);
+      setErrors({...errors, countryArray:"Please select at least one country"});
+      return;
+    }
     axios.post("http://localhost:3001/activities", form);
   };
 
   const handleCountrySelect = (e) => {
     if (e.target.value === "") return;
+    if(form.countryArray.includes(e.target.value)) {
+      setErrors({...errors, countryArray: `country already selected`})
+      return;}
     validateCountries({
       ...form,
       countryArray: [...form.countryArray, e.target.value],
@@ -252,7 +280,7 @@ const Form = () => {
           <option value="">-select country-</option>
           {countries.map((country) => {
             return (
-              <option value={country.id} key={country.id}>
+              <option value={country.id} key={country.id} >
                 {country.name}
               </option>
             );
@@ -272,7 +300,7 @@ const Form = () => {
         </select>
       </div>
 
-      <input type="submit" />
+      <input type="submit" disabled={!isValid}/>
     </form>
   );
 };
