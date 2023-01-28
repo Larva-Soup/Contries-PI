@@ -105,6 +105,7 @@ const CardContainer = ({ loading }) => {
         postsPerPage={postsPerPage}
         totalPosts={countries.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );

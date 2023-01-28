@@ -16,9 +16,37 @@
     outline: none;
 }
 
+.selected{
+    border: none;
+    background-color: #FDED2A;
+    color:#191918;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
+}
+
 .button:hover{
     background-color: #9168b0;
     color:#191918;
+}
+
+.disabled{
+    border: none;
+    background-color: #9b81af;
+    color:#FDED2A;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
 }
 
 .button:active{
