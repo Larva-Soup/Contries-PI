@@ -1,34 +1,47 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { searchByName } from "../../redux/actions";
+import { Link } from "react-router-dom";
+import { clearFilters, searchByName } from "../../redux/actions";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
 
-    const history = useHistory();
+  const [query, setQuery] = useState("");
+  const [warning] = useState("The search might return countries which official name in it's official tongue match with the search input");
 
-    const dispatch = useDispatch()
+  const inputHandler = (e) => {
+    setQuery(e.target.value);
+  };
 
-    const [query, setQuery] = useState("");
+  const reloadHome = () => {
+    dispatch(clearFilters());
+  };
 
-    const inputHandler = (e) =>{
-        setQuery(e.target.value)
-    }
+  const submitSearchHandler = (e) => {
+    e.preventDefault();
+    if (!query) return;
+    dispatch(searchByName(query));
+    setQuery("");
+  };
 
-    const submitSearchHandler = (e) =>{
-        e.preventDefault();
-        if(!query) return;
-        history.push(`/home?name=${query}`)
-        dispatch(searchByName(query))
-
-    }
-    
-    return (<div>
-        <span><Link to="/home">Home</Link></span>
-        <span>  esto es temporal   </span> 
-        <span><Link to="/create">Create</Link></span>
-        <span><form onSubmit={(e) => submitSearchHandler(e)}><label>Search Country</label><input type="text" value={query} onChange={inputHandler}/><button type="submit">Search</button></form></span>
-    </div>)
-}
+  return (
+    <div>
+      <span onClick={reloadHome}>
+        <Link to="/home">Home</Link>
+      </span>
+      <span> esto es temporal </span>
+      <span>
+        <Link to="/create">Create</Link>
+      </span>
+      <span>
+        <form onSubmit={(e) => submitSearchHandler(e)}>
+          <label>Search Country</label>
+          <input type="text" value={query} onChange={inputHandler} />
+          <button type="submit">Search</button>
+        </form>
+      </span>{query.length > 0 && <span>{warning}</span> }
+    </div>
+  );
+};
 
 export default Navbar;

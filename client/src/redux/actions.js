@@ -89,7 +89,7 @@ export const searchByName = (query) =>{
   return async function(dispatch){
     const country = (await axios.get(`http://localhost:3001/countries?name=${query}`))
       .data;
-    dispatch({type: SEARCH_BY_NAME, payload: [country]})
+    dispatch({type: SEARCH_BY_NAME, payload: country})
   }
 
 }

@@ -78,7 +78,7 @@ const searchByName = async (name) => {
     await axios.get(`https://restcountries.com/v3/name/${name}`)
   ).data;
   const countryByName = colador(countryByNameRaw);
-  return countryByName[0];
+  return countryByName;
 };
 
 module.exports = { getAllCountries, getCountryById, searchByName };
