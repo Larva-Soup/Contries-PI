@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import { continents } from "./cardContainerHelper.js";
@@ -22,11 +22,17 @@ const CardContainer = ({ loading }) => {
   const countries = useSelector((state) => state.countries);
   const activitiesList = useSelector((state) => state.activities);
 
+  useEffect(() => {
+    setCurretPage(1)
+  }, [countries])
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = countries.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurretPage(pageNumber);
+
+
 
   const filterByContinentHandler = (e) => {
     document.getElementById("names").value = "";

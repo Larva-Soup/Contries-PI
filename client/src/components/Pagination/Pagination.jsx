@@ -18,7 +18,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     if (number * 1 === 0) {
       setIsValid({ ...isValid, head: false, tail: true });
     } else {
-      console.log("estoy")
       setIsValid({ ...isValid, head: true, tail: true });
       paginate(number);
     }
