@@ -7,6 +7,9 @@ const {
 const getCountriesHandler = async (req, res) => {
   try {
     const { name } = req.query;
+    if(name && !isNaN(name)){
+      throw Error("Numbers not allowed")
+    }
 
     const results = name ? await searchByName(name) : await getAllCountries();
 
