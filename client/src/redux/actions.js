@@ -91,7 +91,6 @@ export const searchByName = (query) => {
       ).data;
       dispatch({ type: SEARCH_BY_NAME, payload: country });
     } catch (error) {
-      console.log(error);
     }
   };
 };
