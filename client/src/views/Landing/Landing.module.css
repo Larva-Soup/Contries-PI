@@ -37,14 +37,15 @@ body{
 }
 
 .button:hover{
-    background-color: #0101012a;
-    color:#7fccf3;
-    box-shadow: 0 0 5px 5px #0101012a;
+    background-color: #01010132;
+    color:#76d7ed;
+    text-shadow: 1px 1px #000000;
+    box-shadow: 0 0 5px 5px #01010132;
 }
 
 
-
+/* 
 a:visited, a:link{
     text-decoration: none;
     color: #59C9D3
-}
+} */
