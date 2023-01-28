@@ -9,7 +9,7 @@ import {
   orderByPopulation,
 } from "../../redux/actions.js";
 import { activitiesHandler,clearFiltersHandler } from "./cardContainerHandlers";
-
+import style from "./CardContainer.module.css"
 
 
 const CardContainer = ({ loading }) => {
@@ -50,7 +50,7 @@ const CardContainer = ({ loading }) => {
   };
 
   return (
-    <div>
+    <div className={style}>
       <div>
         <label>Countries </label>
         <span>
