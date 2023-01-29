@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "../../redux/actions";
 import NoMatch from "../../components/NoMatch/NoMatch";
+import style from "./Detail.module.css"
 
 const Detail = () => {
   const country = useSelector((state) => state.country);
@@ -18,7 +19,7 @@ const Detail = () => {
     return (<div><NoMatch/></div>);
   }
   return (
-    <div>
+    <div className={style.card}>
       <img
         src={country.flags}
         alt={`${country.name}'s flag`}

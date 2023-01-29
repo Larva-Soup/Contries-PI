@@ -23,8 +23,9 @@ const Home = () => {
     
 
     return(<div className={style}>
-    <h1>Esto es Home</h1>
     <CardContainer loading={loading} />
+
+    <div className={style.homefooter}></div>
 
     </div>)
 }

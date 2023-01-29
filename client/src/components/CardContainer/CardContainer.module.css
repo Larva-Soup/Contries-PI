@@ -1,4 +1,23 @@
-span{
-    border:none;
-    padding:2px;
+.cardcontainercontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.cardcontainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-height: 425vh;
+    background-color: #ff8d23;
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+
+.selectcontainer{
+    background-color: blueviolet;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

@@ -9,13 +9,11 @@ const Navbar = () => {
 
   const [query, setQuery] = useState("");
   const [warning] = useState(
-    "The search might return countries which official name in it's official tongue match with the search input"
+    "The search might return countries which official name in their official tongue match with the search input"
   );
 
-
-  const inputHandler = (e) => { 
-       setQuery(e.target.value); 
-    
+  const inputHandler = (e) => {
+    setQuery(e.target.value);
   };
 
   const reloadHome = () => {
@@ -31,12 +29,14 @@ const Navbar = () => {
 
   return (
     <div className={style.navbar}>
-      <span onClick={reloadHome} className={style.element}>
-        <Link to="/home">Home</Link>
-      </span>
-      <span className={style.element}>
-        <Link to="/create">Create</Link>
-      </span>
+      <Link to="/home">
+        <span onClick={reloadHome} className={style.element}>
+          Home
+        </span>
+      </Link>
+      <Link to="/create">
+        <span className={style.element}>Create</span>
+      </Link>
       <span className={style.element}>
         <form onSubmit={(e) => submitSearchHandler(e)} className={style.form}>
           <label>Search Country</label>
@@ -44,8 +44,7 @@ const Navbar = () => {
           <button type="submit">Search</button>
         </form>
       </span>
-      {query &&
-        <span className={style.warning}>{warning}</span>}
+      {query && <span className={style.warning}>{warning}</span>}
     </div>
   );
 };

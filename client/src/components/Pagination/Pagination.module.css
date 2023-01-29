@@ -1,12 +1,13 @@
 .pagination {
     display:inline-block;
+    padding-top: 10px;
 }
 
 .button {
     border: none;
     color: #FDED2A;
     background-color: #700CBC;
-    padding: 15px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration:none;
     display: inline-block;
@@ -20,7 +21,7 @@
     border: none;
     background-color: #FDED2A;
     color:#191918;
-    padding: 15px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration:none;
     display: inline-block;
@@ -28,6 +29,7 @@
     transition-duration: 0.4s;
     cursor: pointer;
     outline: none;
+    transform: translateY(2px);
 }
 
 .button:hover{
@@ -39,7 +41,7 @@
     border: none;
     background-color: #9b81af;
     color:#FDED2A;
-    padding: 15px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration:none;
     display: inline-block;
@@ -49,16 +51,21 @@
     outline: none;
 }
 
-.button:active{
+/* .pagination .button.active{
     background-color: #FDED2A;
     color:#191918;
     transform: translateY(4px);
-}
+} */
 
-.button:focus{
+/* .button:focus{
     background-color: #FDED2A;
     color:#191918;
-}
+} */
+
+/* .button a:active{
+    background-color: #FDED2A;
+    color:#191918;
+} */
 
 ul {
     list-style-type: none;

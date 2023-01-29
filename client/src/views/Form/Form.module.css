@@ -1,0 +1,33 @@
+.form{
+    background-color: rgba(255, 255, 105, 0.859);
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center ;
+}
+
+.formform{
+    height: 80vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+fieldset{
+    border: none;
+}
+
+
+.formchildren{
+    background-color: rgb(44, 41, 46);
+    color: rgb(229, 231, 232);
+    padding: 10px 15px
+}
+
+.formsubmit{
+    border:none;
+    width: 50%;
+}
