@@ -123,7 +123,7 @@ const CardContainer = ({ loading }) => {
         <span className={style.resetButton}>
           <div >
             <button onClick={() => clearFiltersHandler(dispatch)}>
-              Clear Filters
+              RESET
             </button>
           </div>
         </span>

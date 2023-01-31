@@ -5,7 +5,7 @@ export const activitiesHandler = (e, dispatch) => {
 }
 
 export const clearFiltersHandler = (dispatch) => {
-    document.getElementById("continents").value="All Continents"
+    document.getElementById("continents").value=""
     document.getElementById("names").value = "";
     document.getElementById("population").value = "";
     document.getElementById("activities").value="";

@@ -48,8 +48,13 @@ const Form = () => {
         setIsValid(false);
         setErrors({ ...errors, name: "Too short" });
       } else {
-        setIsValid(true);
-        setErrors({ ...errors, name: "" });
+        if (form.name.length > 30) {
+          setIsValid(false);
+          setErrors({ ...errors, name: "Too long" });
+        } else {
+          setIsValid(true);
+          setErrors({ ...errors, name: "" });
+        }
       }
     } else {
       setIsValid(false);
@@ -180,7 +185,6 @@ const Form = () => {
     setForm({ ...form, [prop]: value });
   };
 
-  //se puede cambiar este
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!form.countryArray.length) {
