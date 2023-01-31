@@ -14,15 +14,33 @@
     padding: 0.5em;
 }
 
+.route{
+    text-decoration: none;
+    border: none;
+    padding: 5px 30px;
+    color: #e6ee4f;
+}
+
+.navbar button{
+    border:none;
+    background-color: black;
+    color:#e6ee4f;
+}
+
+.navbar button:hover{
+    background-color: #9328a3ac;
+    color: #e6ee4f;
+}
+
+.navbar input {
+    border:none;
+}
+
 .element{
     text-decoration: none;
     border: none;
     padding: 5px 30px;
-    color: rgb(230, 238, 79);
-}
-
-.element:hover{
-    background-color: #814ae6d4;
+    color: #e6ee4f;
 }
 
 a:link, a:visited{
@@ -33,4 +51,9 @@ a:link, a:visited{
     flex-shrink: 20;
     margin-right: 2px;
     background-color: brown;
+}
+
+.activePath{
+    background-color: #9328a3ac;
+    color: black;
 }

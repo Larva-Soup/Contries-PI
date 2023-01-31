@@ -35,7 +35,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_CONTINENTS:
       const allCountries = state.countriesDefault;
       const countriesByContinent =
-        action.payload === "All Continents"
+        action.payload === ""
           ? allCountries
           : allCountries.filter(
               (country) => action.payload === country.continents
@@ -100,7 +100,7 @@ const rootReducer = (state = initialState, action) => {
     case CREATE_ACTIVITIES_TABLE:
       const hashTable = {};
       for (const activity of state.activities) {
-        !hashTable[activity.name] && (hashTable[activity.name] = true);
+        !hashTable[activity.name] && (hashTable[activity.name.toLowerCase()] = true);
       }
       return {
         ...state,
@@ -117,7 +117,7 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_FILTERS:
       return{...state, countries: state.countriesDefault};
     case SEARCH_BY_NAME:
-      return{...state, countries: action.payload}
+      return{...state, countries: action.payload};
     default:
       return { ...state };
   }

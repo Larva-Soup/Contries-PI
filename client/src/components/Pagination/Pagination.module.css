@@ -5,8 +5,8 @@
 
 .button {
     border: none;
-    color: #FDED2A;
-    background-color: #700CBC;
+    color: #ffff69db;
+    background-color: #813f8b;
     padding: 5px 10px;
     text-align: center;
     text-decoration:none;
@@ -15,6 +15,7 @@
     transition-duration: 0.4s;
     cursor: pointer;
     outline: none;
+    text-shadow: 1px 1px black;
 }
 
 .selected{
@@ -35,6 +36,7 @@
 .button:hover{
     background-color: #9168b0;
     color:#191918;
+    text-shadow: none;
 }
 
 .disabled{
@@ -50,22 +52,6 @@
     cursor: pointer;
     outline: none;
 }
-
-/* .pagination .button.active{
-    background-color: #FDED2A;
-    color:#191918;
-    transform: translateY(4px);
-} */
-
-/* .button:focus{
-    background-color: #FDED2A;
-    color:#191918;
-} */
-
-/* .button a:active{
-    background-color: #FDED2A;
-    color:#191918;
-} */
 
 ul {
     list-style-type: none;

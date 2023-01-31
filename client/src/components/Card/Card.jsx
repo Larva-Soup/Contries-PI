@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 const Card = ({ name, flags, continents, id, population }) => {
   return (
-    <div className={style.card} id={id}>
-      <img src={flags} alt={`${name}'s flag`} className={style.flag}/>
-      <Link to={`/${id}`}>
+    <Link to={`/${id}`}>
+      <div className={style.card} id={id}>
         <h3>{name}</h3>
-      </Link>
 
-      <h4>Continent: {continents}</h4>
-      <h4>Population: {population}</h4>
-    </div>
+        <img src={flags} alt={`${name}'s flag`} className={style.flag} />
+
+        <h4>Continent: {continents}</h4>
+        <h4>Population: {population}</h4>
+      </div>
+    </Link>
   );
 };
 

@@ -1,23 +1,24 @@
 .card {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
   background-color: transparent;
   transition: transform .2s;
-  width: 15%;
-  height: 15%;
+  width: 210px;
+  height: 220px;
   margin: 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: black;
   }
 
   .card:hover{
-    transform:scale(1.2);
     overflow: visible;
-    background-color: aqua;
-
+    background-color: #813f8b;
+    border-radius: 8px;
+    color: #ffff69db;
+    text-shadow: 1px 1px black;
   }
 
   /* img{
@@ -38,5 +39,7 @@
     width: 60%;
   }
 
-  
+  .card a{
+    text-decoration: none;
+  }
   

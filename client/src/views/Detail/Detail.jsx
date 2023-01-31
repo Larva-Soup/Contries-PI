@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "../../redux/actions";
 import NoMatch from "../../components/NoMatch/NoMatch";
-import style from "./Detail.module.css"
+import style from "./Detail.module.css";
 
 const Detail = () => {
   const country = useSelector((state) => state.country);
@@ -16,15 +16,19 @@ const Detail = () => {
   }, [dispatch, id]);
 
   if (!country.name) {
-    return (<div><NoMatch/></div>);
+    return (
+      <div>
+        <NoMatch />
+      </div>
+    );
   }
   return (
     <div className={style.card}>
       <img
         src={country.flags}
         alt={`${country.name}'s flag`}
-        height="300px"
-        width="500px"
+        height="250px"
+        width="400px"
       />
       <h3>{country.name}</h3>
       <p>Continent: {country.continents}</p>
@@ -46,7 +50,13 @@ const Detail = () => {
               <h4>Activity Name: {activity.name}</h4>
               <p>Difficulty: {activity.difficulty}</p>
               <p>Duration: {activity.duration} hh/mm/ss</p>
-              <p>Season: {activity.season}</p>
+              <p>
+                Season:{" "}
+                {(activity.season === "Primavera" && "Spring") ||
+                  (activity.season === "Verano" && "Summer") ||
+                  (activity.season === "Otoño" && "Fall") ||
+                  (activity.season === "Invierno" && "Winter")}
+              </p>
             </div>
           );
         })}

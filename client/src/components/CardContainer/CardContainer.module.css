@@ -10,14 +10,41 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    max-height: 425vh;
-    background-color: #ff8d23;
+    /* max-height: 500vh; */
+    background-color: #ffff69db;
     padding-bottom: 40px;
     padding-top: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 25px 5px #211c0b inset;
+    row-gap: 25px;
 }
 
 .selectcontainer{
-    background-color: blueviolet;
+    display: flex;
+    justify-content: space-around;
+    color: #b1aeae;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.resetButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.resetButton button{
+    background-color: black;
+    border: 1px solid black;
+    color: #b1aeae;    
+}
+
+.resetButton button:hover{
+    border: 1px solid white;
+}
+
+.filterGroup{
+    border: 1px solid #c6c4c477;
+    background-color: #393737ca;
 }

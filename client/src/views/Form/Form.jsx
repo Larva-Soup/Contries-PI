@@ -35,7 +35,7 @@ const Form = () => {
   const activitiesList = useSelector((state) => state.activitiesHashTable);
 
   const validateName = (form) => {
-    if (activitiesList[form.name]) {
+    if (activitiesList[form.name.toLowerCase()]) {
       setIsValid(false);
       return setErrors({ ...errors, name: `${form.name} already exists` });
     } else {
@@ -60,7 +60,7 @@ const Form = () => {
       setIsValid(false);
       setErrors({ ...errors, name: "Empty field" });
     }
-    setForm({ ...form, countryArray: [...form.countryArray] });
+    // setForm({ ...form, countryArray: [...form.countryArray] });
   };
 
   const validateDifficulty = (form) => {
@@ -134,8 +134,6 @@ const Form = () => {
     }
   };
 
-  // const [countryName, setCountryName] = useState({id:"", name:""}) //pospuesto
-
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getActivitiesList());
@@ -194,6 +192,17 @@ const Form = () => {
       return;
     }
     axios.post("http://localhost:3001/activities", form);
+    setForm({
+      name: "",
+      difficulty: "1",
+      duration: "",
+      season: "Primavera",
+      countryArray: [],
+    });
+    setTime({
+      hours: 1,
+      minutes: 0,
+    });
   };
 
   const handleCountrySelect = (e) => {
@@ -306,7 +315,12 @@ const Form = () => {
           </select>
         </div>
 
-        <input type="submit" disabled={!isValid} value="Send" className={style.formsubmit}/>
+        <input
+          type="submit"
+          disabled={!isValid}
+          value="Send"
+          className={style.formsubmit}
+        />
       </form>
     </div>
   );

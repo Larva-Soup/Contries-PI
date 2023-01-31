@@ -41,14 +41,14 @@ const CardContainer = ({ loading }) => {
   };
 
   const alphabeticalOrderHandler = (e) => {
-    document.getElementById("continents").value = "All Continents";
+    document.getElementById("continents").value = "";
     document.getElementById("population").value = "";
     document.getElementById("activities").value = "";
     dispatch(orderByName(e.target.value));
   };
 
   const sortByPopulationHandler = (e) => {
-    document.getElementById("continents").value = "All Continents";
+    document.getElementById("continents").value = "";
     document.getElementById("names").value = "";
     document.getElementById("activities").value = "";
     dispatch(orderByPopulation(e.target.value));
@@ -57,53 +57,75 @@ const CardContainer = ({ loading }) => {
   return (
     <div className={style.cardcontainercontainer}>
       <div className={style.selectcontainer}>
-        <label>Countries </label>
-        <span>
-          <select onChange={(e) => filterByContinentHandler(e)} id="continents" className={style.cardselect}>
-            {continents.map((continent) => (
-              <option value={continent.value} key={continent.value}>
-                {continent.value}
-              </option>
-            ))}
-          </select>
+        <span className={style.filterGroup}>
+          <div>Filter Countries</div>
+          <div>
+            <span>
+              <select
+                onChange={(e) => filterByContinentHandler(e)}
+                id="continents"
+                className={style.cardselect}
+              >
+                {continents.map((continent) => (
+                  <option value={continent.value} key={continent.value}>
+                    {continent.label}
+                  </option>
+                ))}
+              </select>
+            </span>
+            <span>
+              <select
+                onChange={(e) => activitiesHandler(e, dispatch)}
+                id="activities"
+              >
+                <option value="">--Select Activity--</option>
+                {activitiesList &&
+                  activitiesList.length &&
+                  activitiesList.map((activity) => (
+                    <option key={activity.id} value={activity.name}>
+                      {activity.name}
+                    </option>
+                  ))}
+                {(!activitiesList || !activitiesList.length) && (
+                  <option>Not Activities Created Yet</option>
+                )}
+              </select>
+            </span>
+          </div>
         </span>
-        <span>
-          <select
-            onChange={(e) => activitiesHandler(e, dispatch)}
-            id="activities"
-            className={style.cardselect}
-          >
-            <option value="">--Select Activity--</option>
-            {activitiesList &&
-              activitiesList.length &&
-              activitiesList.map((activity) => (
-                <option key={activity.id} value={activity.name}>
-                  {activity.name}
-                </option>
-              ))}
-            {(!activitiesList || !activitiesList.length) && (
-              <option>Not Activities Created Yet</option>
-            )}
-          </select>
+
+        <span className={style.filterGroup}>
+          <div>Sort Countries</div>
+          <div>
+            <span>
+              <select
+                onChange={(e) => alphabeticalOrderHandler(e)}
+                id="names"
+              >
+                <option value="">--Sort Alphabetically--</option>
+                <option value="asc">A-Z</option>
+                <option value="desc">Z-A</option>
+              </select>
+            </span>
+            <span>
+              <select
+                onChange={(e) => sortByPopulationHandler(e)}
+                id="population"
+              >
+                <option value="">--Sort By Population--</option>
+                <option value="asc">Ascend</option>
+                <option value="desc">Descend</option>
+              </select>
+            </span>
+          </div>
         </span>
-        <span>
-          <select onChange={(e) => alphabeticalOrderHandler(e)} id="names" className={style.cardselect}>
-            <option value="">--Sort Alphabetically--</option>
-            <option value="asc">Ascend</option>
-            <option value="desc">Descend</option>
-          </select>
-        </span>
-        <span>
-          <select onChange={(e) => sortByPopulationHandler(e)} id="population" className={style.cardselect}>
-            <option value="">--Sort By Population--</option>
-            <option value="asc">Ascend</option>
-            <option value="desc">Descend</option>
-          </select>
-        </span>
-        <span>
-          <button onClick={() => clearFiltersHandler(dispatch)}>
-            Clear Filters
-          </button>
+
+        <span className={style.resetButton}>
+          <div >
+            <button onClick={() => clearFiltersHandler(dispatch)}>
+              Clear Filters
+            </button>
+          </div>
         </span>
       </div>
       {loading && <h2>Loading...</h2>}
